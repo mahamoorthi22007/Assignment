@@ -1,0 +1,127 @@
+class Segments {
+    String traveler;
+    int totalcost;
+    int start_date;
+    int end_date;
+
+    public Segments(String traveler, int totalcost, int start_date, int end_date) {
+        this.traveler = traveler;
+        this.totalcost = totalcost;
+        this.start_date = start_date;
+        this.end_date = end_date;
+    }
+
+    public void getter() {
+        System.out.println("Traveler name: " + traveler);
+        System.out.println("Total cost is: " + totalcost);
+        System.out.println("Starting date is: " + start_date);
+        System.out.println("Ending date is: " + end_date);
+    }
+
+    public void setter(String traveler, int totalcost, int start_date, int end_date) {
+        this.traveler = traveler;
+        this.totalcost = totalcost;
+        this.start_date = start_date;
+        this.end_date = end_date;
+    }
+
+    public int estimatecost() {
+        return totalcost;
+    }
+}
+class FlightSegment extends Segments {
+    int flightno;
+    String destination;
+    String origin;
+    String depart;
+    String arrive;
+    int fare;
+
+    public FlightSegment(String traveler, int totalcost, int start_date, int end_date,
+                         int flightno, String origin, String destination,
+                         String depart, String arrive, int fare) 
+{
+        super(traveler, totalcost, start_date, end_date);
+        this.flightno = flightno;
+        this.destination = destination;
+        this.origin = origin;
+        this.depart = depart;
+        this.arrive = arrive;
+        this.fare = fare;
+    }
+    public int estimatecost() {
+        return fare;
+    }
+
+    public void getter() {
+        System.out.println("Flight number: " + flightno);
+        System.out.println("From: " + origin + " To: " + destination);
+        System.out.println("Depart: " + depart + " | Arrive: " + arrive);
+        System.out.println("Ticket fare: " + fare);
+    }
+    public void addflight(int flightno) {
+        System.out.println("The flight number is " + flightno);
+    }
+
+    public void addflight(String origin, String destination) {
+        System.out.println("This flight is coming from " + origin + " and going to " + destination);
+    }
+}
+class HotelBooking extends Segments {
+    String hotelName;
+    String city;
+    String checkin;
+    String checkout;
+    int nightlyRate;
+
+    public HotelBooking(String traveler, int totalcost, int start_date, int end_date,
+                        String hotelName, String city, String checkin,
+                        String checkout, int nightlyRate) {
+        super(traveler, totalcost, start_date, end_date);
+        this.hotelName = hotelName;
+        this.city = city;
+        this.checkin = checkin;
+        this.checkout = checkout;
+        this.nightlyRate = nightlyRate;
+    }
+    public int estimatecost() {
+        return nightlyRate;
+    }
+
+    public void getter() {
+        System.out.println("Hotel: " + hotelName + " in " + city);
+        System.out.println("Check-in: " + checkin + " | Check-out: " + checkout);
+        System.out.println("Nightly rate: " + nightlyRate);
+    }
+
+    public void addHotel() {
+        System.out.println("Hotel booking: " + hotelName + " (" + checkin + " to " + checkout + ")");
+    }
+}
+public class TravelAppmain {
+    public static void main(String[] args) {
+        Segments obj1 = new Segments("Maha", 7000, 13, 20);
+        Segments obj2 = new Segments("Kavi", 8000, 1, 13);
+
+        int totalCost = obj1.estimatecost() + obj2.estimatecost();
+        System.out.println("Combined Cost: " + totalCost);
+
+        obj1.getter();
+        obj2.getter();
+
+        FlightSegment obj3 = new FlightSegment("Maha", 0, 13, 20,
+                228, "Bangalore", "London", "7:50AM", "1:30PM", 15000);
+
+        obj3.getter();
+        obj3.addflight(228);
+        obj3.addflight("Bangalore", "London");
+        System.out.println("Flight Estimated Cost: " + obj3.estimatecost());
+
+        HotelBooking obj5 = new HotelBooking("Maha", 0, 29, 31,
+                "Chennai Villas", "Chennai", "29/08/2025", "31/08/2025", 10000);
+
+        obj5.getter();
+        obj5.addHotel();
+        System.out.println("Hotel Estimated Cost: " + obj5.estimatecost());
+    }
+}
